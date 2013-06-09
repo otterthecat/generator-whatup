@@ -1,5 +1,24 @@
 {
-  "name": "package",
+  "name": "<%= projectName %>",
+  "title": "Awesome Title",
+  "description": "100% pure adrenaline",
   "version": "0.0.0",
-  "dependencies": {}
+  "homepage": "http://someurl.com/<%= projectName %>",
+  "author": {
+    "name": "Sgt. Awesome",
+    "email": "somename@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= ghAcct %>/<%= projectName %>"
+  },
+  "bugs": {
+    "url": "https://github.com/<%= ghAcct %>/<%= projectName %>"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.1",
+    "<%= testFw.name %>": "<%= testFw.version %>"
+  },
+  "keywords": []
 }

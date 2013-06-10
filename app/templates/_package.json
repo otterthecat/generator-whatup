@@ -17,7 +17,8 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.1",<% if (useLess) { %>
+    "grunt-contrib-less": "~0.6.0",<% } %>
     "<%= testFw.name %>": "<%= testFw.version %>"
   },
   "keywords": []

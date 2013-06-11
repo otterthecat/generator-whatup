@@ -91,7 +91,7 @@ WhatupGenerator.prototype.app = function app() {
     console.log("I don't know what " + this.testFramework + " is, so I'm going to default to Jasmine");
   }
 
-  //this.copy('_package.json', 'package.json');
+
   this.copy('_bower.json', 'bower.json');
 };
 
@@ -102,4 +102,5 @@ WhatupGenerator.prototype.packageJSON = function packageJSON() {
 WhatupGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
+  this.copy('gitignore', '.gitignore');
 };

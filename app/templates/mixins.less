@@ -1,0 +1,63 @@
+@primary_color: rgb(25,185,80);
+@primary_color_dark: darken(@primary_color, 15%);
+@primary_color_light: lighten(@primary_color, 15%);
+
+@secondary_color: rgb(185,245,240);
+@secondary_color_dark: darken(@secondary_color, 15%);
+@secondary_color_light: lighten(@secondary_color, 15%);
+
+@support_color: rgb(50,50,50);
+@support_color_dark: darken(@support_color, 15%);
+@support_color_light: lighten(@support_color, 50%);
+
+
+/* thanks to http://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/ */
+.font_size(@sizeValue){
+
+	@remValue: @sizeValue;
+	@pxValue: (@sizeValue * 10);
+	font-size: ~"@{pxValue}px"; 
+	font-size: ~"@{remValue}rem";
+}
+
+/* some helpers for basic css effects */
+.text_drop_shadow(@h: 3px, @v: 3px, @blur: 3px, @color: @primary_color_dark){
+
+	-webkit-text-shadow: @h @v @blur @color;
+	-moz-text-shadow: @h @v @blur @color;
+	-ms-text-shadow: @h @v @blur @color;
+	-o-text-shadow: @h @v @blur @color;
+	text-shadow: @h @v @blur @color;
+}
+
+.text_inset_shadow(@h: 0px, @v: 1px, @blur: 1px, @color: @primary_color_med_light){
+
+	-webkit-text-shadow: @h @v @blur @color;
+	-moz-text-shadow: @h @v @blur @color;
+	-ms-text-shadow: @h @v @blur @color;
+	-o-text-shadow: @h @v @blur @color;
+	text-shadow: @h @v @blur @color;
+}
+
+.box_drop_shadow(@h: 3px, @v: 3px, @r: 5px, @color: @support_color_dark){
+
+	-webkit-box-shadow: @h @v @r @color;
+	-moz-box-shadow: @h @v @r @color;
+	box-shadow: @h @v @r @color;
+}
+
+.box_inset_shadow(@h: 0px, @v: 1px, @r: 1px, @color: @support_color_light){
+
+	-webkit-box-shadow: @h @v @r @color;
+	-moz-box-shadow: @h @v @r @color;
+	box-shadow: @h @v @r @color;
+}
+
+.bg_gradient(@pos: top, @start_color: @support_color_med_light , @end_color: @support_color_dark){
+
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@pos), color-stop(0.5, @start_color), to(@end_color));
+	background-image: -webkit-linear-gradient(@pos, @start_color, @end_color);
+	background-image: -moz-linear-gradient(@pos, @start_color, @end_color);
+	background-image: -o-linear-gradient(@pos, @start_color, @end_color);
+	background-image: linear-gradient(@pos, @start_color, @end_color);
+}

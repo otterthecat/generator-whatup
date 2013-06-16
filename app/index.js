@@ -79,18 +79,26 @@ WhatupGenerator.prototype.app = function app() {
   // LESS support
   if(this.useLess){
     this.mkdir('less');
+    this.copy('320.less', 'less/320.less');
+    this.copy('480.less', 'less/480.less');
+    this.copy('ipadPortrait.less', 'less/ipadPortrait.less');
+    this.copy('mixins.less', 'less/mixins.less');
+    this.copy('typography.less', 'less/typography.less');
+    this.copy('main.less', 'less/main.less');
   }
 
   // test frameworks
   this.testFw = {
     name: "grunt-contrib-jasmine",
+    shortName: 'jasmine',
     version: "~0.4.2"
   }
 
   if(this.testFramework === "qunit"){
 
-    this.testFw.name = "grunt-contrib-qunit",
-    this.testFw.version = "~0.1.0"
+    this.testFw.name = "grunt-contrib-qunit";
+    this.testFw.shortName = "qunit";
+    this.testFw.version = "~0.1.0";
   } else if(this.testFramework !== "jasmine"){
 
     console.log("I don't know what " + this.testFramework + " is, so I'm going to default to Jasmine");

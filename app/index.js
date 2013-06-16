@@ -12,6 +12,8 @@ var WhatupGenerator = module.exports = function WhatupGenerator(args, options, c
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+
+  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
 };
 
 util.inherits(WhatupGenerator, yeoman.generators.Base);
@@ -69,7 +71,10 @@ WhatupGenerator.prototype.askFor = function askFor() {
 
 WhatupGenerator.prototype.app = function app() {
   this.mkdir('app');
-  this.mkdir('app/templates');
+  this.mkdir('app/scripts');
+  this.mkdir('app/css');
+  this.mkdir('app/img');
+  this.write('app/index.html', this.indexFile);
 
   // LESS support
   if(this.useLess){
@@ -98,6 +103,10 @@ WhatupGenerator.prototype.app = function app() {
 WhatupGenerator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
 };
+
+WhatupGenerator.prototype.gruntfile = function gruntfile(){
+  this.template("Gruntfile.js");
+}
 
 WhatupGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');

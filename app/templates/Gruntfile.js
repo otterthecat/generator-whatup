@@ -1,32 +1,31 @@
 /*global module:false*/
 module.exports = function(grunt) {
+
+    // load all grunt tasks
+    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+    // configurable paths
+    var yeomanConfig = {
+        app: 'app',
+        dist: 'dist'
+    };
+
   // Project configuration.
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
       dist: {
-        src: ['js/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        src: ['src/<%= projectName %>.js'],
+        dest: 'dist/<%= projectName %>.js'
       }
     },
     uglify: {
       options: {
-        banner: '<%= banner %>'
       },
       dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: 'src/<%= projectName %>.js',
+        dest: 'dist/<%= projectName %>.min.js'
       }
     },
     jshint: {
@@ -44,7 +43,26 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true,
         globals: {}
-      },
+      },<% if (useLess) { %>
+      less: {
+        development: {
+          options: {
+            paths: ["assets/css"]
+          },
+          files: {
+            "path/to/result.css": "path/to/source.less"
+          }
+        },
+        production: {
+          options: {
+            paths: ["assets/css"],
+            yuicompress: true
+          },
+          files: {
+            "path/to/result.css": "path/to/source.less"
+          }
+        }
+      },<% } %>
       gruntfile: {
         src: 'Gruntfile.js'
       },
@@ -64,13 +82,13 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   // grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('<%= testFw.name %>');
+  grunt.loadNpmTasks('grunt-contrib-jshint');<% if (useLess) { %>
+  grunt.loadNpmTasks('grunt-contrib-less');<% } %>
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'jasmine', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jasmine', 'uglify']);
   grunt.registerTask('scrub', ['jshint', 'jasmine']);
 
 };
